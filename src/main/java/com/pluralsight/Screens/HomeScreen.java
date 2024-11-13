@@ -14,9 +14,9 @@ public class HomeScreen {
                 String selection = Console.PromptForString();
 
                 if (selection.equalsIgnoreCase("N")) {
-                    System.out.println("go to sandwich screen");
+                    OrderScreen.orderScreen();
                 } else if (selection.equalsIgnoreCase("X")) {
-                    System.out.println("Thank you for using the Accounting Ledger App! :D");
+                    System.out.println("Thank you for shopping at DELI-cious! :D");
                     return;
                 } else {
                     System.out.println("Invalid Command");
