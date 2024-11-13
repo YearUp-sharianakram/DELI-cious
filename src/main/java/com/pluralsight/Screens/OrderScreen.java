@@ -27,7 +27,7 @@ public class OrderScreen {
                     SandwichScreen.sandwichScreen();
                 }
                 else if (selection.equalsIgnoreCase("2")) {
-                    return;
+                    DrinkScreen.drinkScreen();
                 }
                 else if (selection.equalsIgnoreCase("3")) {
                     System.out.println("Thank you for shopping at DELI-cious! :D");

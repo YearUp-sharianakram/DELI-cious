@@ -16,32 +16,42 @@ public class DrinkScreen {
             "Hot Chocolate"
     };
 
+
     public static void drinkScreen() {
+        String size = "";
         while (true) {
             try {
 
-                System.out.println("Please choose one of the following drink size options:");
-                System.out.println(" (S) - Small");
-                System.out.println(" (M) - Medium");
-                System.out.println(" (L) - Medium");
-                System.out.println(" (X) - Return back to Order Screen");
+                while(size.isEmpty()) {
+                    System.out.println("Please choose one of the following drink size options:");
+                    System.out.println(" (S) - Small");
+                    System.out.println(" (M) - Medium");
+                    System.out.println(" (L) - Medium");
+                    System.out.println(" (X) - Return back to Order Screen");
 
-                String size = Console.PromptForString("Option: ");
-                if (size.equalsIgnoreCase("X")) {
-                    SandwichScreen.sandwichScreen();
+                    String option = Console.PromptForString("Option: ");
+                    if (option.equalsIgnoreCase("X")) {
+                        OrderScreen.orderScreen();
+                        break;
+                    } else if (option.equalsIgnoreCase("S") || option.equalsIgnoreCase("small")) {
+                        size = "Small";
+                        break;
+                    } else if (option.equalsIgnoreCase("M") || option.equalsIgnoreCase("medium")) {
+                        size = "Medium";
+                        break;
+                    } else if (option.equalsIgnoreCase("L") || option.equalsIgnoreCase("Large")) {
+                        size = "Large";
+                        break;
+                    } else {
+                        System.out.println("Invalid Command");
+                    }
                 }
-                else {
-
-                }
-
-
-
 
 
 
                 System.out.println("\nWhat drink would you like?");
-                for (int i = 1; i < listOfDrinks.length; i++ ){
-                    System.out.println(" (" + i + ") " + listOfDrinks[i]);
+                for (int i = 0; i < listOfDrinks.length; i++ ){
+                    System.out.println(" (" + (i+1) + ") " + listOfDrinks[i]);
                 }
                 System.out.println(" (X) - Return back to Order Screen");
 
@@ -51,8 +61,22 @@ public class DrinkScreen {
 
                 if (selection.equalsIgnoreCase("X")) {
                     OrderScreen.orderScreen();
+                    break;
                 }
-                else
+                else{
+                    int choice = Integer.parseInt(selection);
+                    if (choice > listOfDrinks.length){
+                        System.out.println("Invalid Command");
+                    }else{
+                        String drink = listOfDrinks[choice - 1];
+                        int quantity = Console.PromptForInt("How many would you like?");
+                        size = "";
+                        }
+                    }
+
+
+
+
             } catch (Exception e) {
                 System.out.println("Invalid Command");
             }
