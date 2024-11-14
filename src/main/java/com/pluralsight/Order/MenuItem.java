@@ -17,5 +17,7 @@ public abstract class MenuItem {
         return size;
     }
 
+
+
     public abstract double getPrice();
 }

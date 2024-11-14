@@ -22,4 +22,16 @@ public class Drink extends MenuItem {
             return largePrice;
         }
     }
+
+    @Override
+    public String toString(){
+        String drinkStatement = this.getSize() + " " + this.getDescription();
+        if (this.containsIce){
+            drinkStatement = drinkStatement + " (Iced)";
+        }else{
+            drinkStatement = drinkStatement + " (Not Iced)";
+        }
+        return (drinkStatement + " " + this.getPrice());
+
+    }
 }

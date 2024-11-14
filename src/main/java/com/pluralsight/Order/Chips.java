@@ -1,7 +1,7 @@
 package com.pluralsight.Order;
 
 public class Chips extends MenuItem {
-    public final String[] chipNames = {
+    public static final String[] chipFlavors = {
             "Classic",
             "Sour Cream & Onion",
             "Barbecue",
@@ -23,5 +23,10 @@ public class Chips extends MenuItem {
     @Override
     public double getPrice() {
         return chipsCost;
+    }
+
+    @Override
+    public String toString() {
+        return (this.getDescription() + " " + this.getPrice());
     }
 }

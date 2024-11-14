@@ -3,8 +3,6 @@ package com.pluralsight.Screens;
 import com.pluralsight.Order.*;
 import com.pluralsight.util.*;
 
-//import com.pluralsight.Order.MenuItem;
-
 import java.util.ArrayList;
 
 public class OrderScreen {
@@ -17,7 +15,8 @@ public class OrderScreen {
                 System.out.println(" (1)- Add Sandwich");
                 System.out.println(" (2)- Add Drink");
                 System.out.println(" (3)- Add Chips");
-                System.out.println(" (4)- Checkout");
+                System.out.println(" (4)- View Cart");
+                System.out.println(" (5)- Checkout");
                 System.out.println(" (0)- Cancel Order"); // return back to home screen
 
 
@@ -30,22 +29,30 @@ public class OrderScreen {
                     DrinkScreen.drinkScreen();
                 }
                 else if (selection.equalsIgnoreCase("3")) {
-                    System.out.println("Thank you for shopping at DELI-cious! :D");
-                    return;
+                    ChipsScreen.chipsScreen();
                 }
                 else if (selection.equalsIgnoreCase("4")) {
-                    System.out.println("Thank you for shopping at DELI-cious! :D");
-                    return;
+                    displayCurrentItems();
+                }
+                else if (selection.equalsIgnoreCase("5")) {
+                    CheckoutScreen.checkoutScreen();
                 }
                 else if (selection.equalsIgnoreCase("0")) {
-                    System.out.println("Thank you for shopping at DELI-cious! :D");
-                    return;
+                    items = new ArrayList<>();
+                    HomeScreen.homeScreen();
                 } else {
                     System.out.println("Invalid Command");
                 }
             } catch (Exception e) {
                 System.out.println("Invalid Command");
             }
+        }
+    }
+
+    public static void displayCurrentItems(){
+        System.out.println("Current Cart: ");
+        for(MenuItem item: items){
+            System.out.println(item);
         }
     }
 }

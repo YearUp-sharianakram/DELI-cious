@@ -17,16 +17,19 @@ public class Console {
 
 
     public static boolean PromptForYesNo(String prompt) {
-        System.out.print(prompt + " ( Y for Yes, N for No ) ?");
-        String userinput = scanner.nextLine();
 
-        return
-                (
-                        userinput.equalsIgnoreCase("Y")
-                                ||
-                                userinput.equalsIgnoreCase("YES")
-                );
+        while(true) {
+            System.out.print(prompt + " ( Y for Yes, N for No ) ?");
+            String userinput = scanner.nextLine();
 
+            if (userinput.equalsIgnoreCase("Y") || userinput.equalsIgnoreCase("YES")){
+                return true;
+            }else if (userinput.equalsIgnoreCase("N") || userinput.equalsIgnoreCase("NO")){
+                return false;
+            }else{
+                System.out.println("Invalid Command");
+            }
+        }
     }
 
     public static int PromptForInt(String prompt) {
@@ -55,5 +58,6 @@ public class Console {
         scanner.nextLine();
         return userinput;
     }
+
 
 }

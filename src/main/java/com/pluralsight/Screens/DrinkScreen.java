@@ -1,6 +1,7 @@
 package com.pluralsight.Screens;
 
-import com.pluralsight.util.Console;
+import com.pluralsight.Order.*;
+import com.pluralsight.util.*;
 
 public class DrinkScreen {
     public static final String[] listOfDrinks = {
@@ -68,8 +69,11 @@ public class DrinkScreen {
                     if (choice > listOfDrinks.length){
                         System.out.println("Invalid Command");
                     }else{
-                        String drink = listOfDrinks[choice - 1];
-                        int quantity = Console.PromptForInt("How many would you like?");
+                        String drinkName = listOfDrinks[choice - 1];
+                        boolean isIced = Console.PromptForYesNo("Would you like Ice with your drink?");
+                        Drink makeDrink = new Drink(drinkName, size, isIced);
+                        OrderScreen.items.add(makeDrink);
+                        System.out.println("Successfully added drink!!!");
                         size = "";
                         }
                     }
