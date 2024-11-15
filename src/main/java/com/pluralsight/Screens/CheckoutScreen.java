@@ -18,7 +18,7 @@ public class CheckoutScreen {
                 boolean confirmed = Console.PromptForYesNo("Confirm or Cancel?");
                 if(!confirmed){
                     OrderScreen.items.clear();
-//                    HomeScreen.homeScreen();
+                    HomeScreen.homeScreen();
 
 
                 }else{

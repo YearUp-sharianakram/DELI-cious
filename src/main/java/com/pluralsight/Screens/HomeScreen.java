@@ -12,7 +12,7 @@ public class HomeScreen {
                 System.out.println(" (N)- New Order");
                 System.out.println(" (X)- Exit");
 
-                String selection = Console.PromptForString();
+                String selection = Console.PromptForString("Option: ");
 
                 if (selection.equalsIgnoreCase("N")) {
                     OrderScreen.orderScreen();

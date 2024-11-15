@@ -9,14 +9,16 @@ public class SandwichScreen {
     public static void sandwichScreen() {
         String breadName = "";
         String size = "";
-        System.out.println("\nCreating Sandwich");
+        System.out.println("\nOne Sandwich coming right up...");
         Sandwich theSandwich = null;
         HashMap<String, Topping> toppings = new HashMap<>();
         boolean toasted = false;
-        while (true) {
+        String currentDepartment = "meat";
+        boolean exit = false;
+        while (!exit) {
             try {
                 while (breadName.isEmpty()) {
-                    System.out.println("\nWhat bread would you like?");
+                    System.out.println("\nWhich bread would you like?");
                     for (int i = 0; i < Sandwich.typesOfBread.length; i++) {
 
                         System.out.println(" (" + (i + 1) + ") " + Sandwich.typesOfBread[i]);
@@ -26,6 +28,7 @@ public class SandwichScreen {
                     String selection = Console.PromptForString("Option: ");
 
                     if (selection.equalsIgnoreCase("X")) {
+                        exit = true;
                         break;
                     } else {
                         int choice = Integer.parseInt(selection);
@@ -33,7 +36,7 @@ public class SandwichScreen {
                             System.out.println("Invalid Command");
                         } else {
                             breadName = Sandwich.typesOfBread[choice - 1];
-                            System.out.println("Getting " + breadName);
+                            System.out.println(breadName + " bread selected");
 
                         }
                     }
@@ -41,8 +44,8 @@ public class SandwichScreen {
 
                 }
 
-                while (size.isEmpty()) {
-                    System.out.println("Please choose one of the following  size options:");
+                while (size.isEmpty() && !breadName.isEmpty() ) {
+                    System.out.println("Which size would you like?");
                     System.out.println(" (S) - Small 4 inch");
                     System.out.println(" (M) - Medium 8 inch");
                     System.out.println(" (L) - Medium 12 inch");
@@ -56,25 +59,25 @@ public class SandwichScreen {
                         size = "Small";
                         theSandwich = new Sandwich("Small", breadName, toasted);
                         toppings = theSandwich.getToppings();
-                        break;
+
                     } else if (option.equalsIgnoreCase("M") || option.equalsIgnoreCase("medium")) {
                         size = "Medium";
                         theSandwich = new Sandwich("Small", breadName, toasted);
                         toppings = theSandwich.getToppings();
-                        break;
+
                     } else if (option.equalsIgnoreCase("L") || option.equalsIgnoreCase("Large")) {
                         size = "Large";
                         theSandwich = new Sandwich("Small", breadName, toasted);
                         toppings = theSandwich.getToppings();
-                        break;
+
                     } else {
                         System.out.println("Invalid Command");
                     }
                 }
 
                 boolean confirmation = false;
-                String currentDepartment = "meat";
-                while (currentDepartment.equals("meat")) {
+
+                while (!size.isEmpty() && currentDepartment.equals("meat")) {
                     try {
                         System.out.println("\nWhat meats would you like?");
                         for (int i = 0; i < Topping.meats.length; i++) {
@@ -87,10 +90,8 @@ public class SandwichScreen {
 
                         if (selection.equalsIgnoreCase("B")) {
                             size = "";
-                            break;
                         } else if (selection.equalsIgnoreCase("C")) {
                             currentDepartment = "cheese";
-                            break;
                         } else {
                             int choice = Integer.parseInt(selection);
                             if (choice > Topping.meats.length) {
@@ -100,7 +101,7 @@ public class SandwichScreen {
                                 if (!toppings.containsKey(meatName)) {
                                     Topping currentTopping = Topping.createMeat(meatName);
                                     toppings.put(meatName, currentTopping);
-//                                    theSandwich.setContainsMeat(true);
+
                                 } else {
                                     Topping currentTopping = toppings.get(meatName);
                                     currentTopping.addQuantity();
@@ -108,6 +109,7 @@ public class SandwichScreen {
 
                             }
                         }
+                        theSandwich.displayToppings();
                     } catch (Exception e) {
                         System.out.println("Invalid Command");
                     }
@@ -126,10 +128,10 @@ public class SandwichScreen {
 
                         if (selection.equalsIgnoreCase("B")) {
                             currentDepartment = "meat";
-                            break;
+
                         } else if (selection.equalsIgnoreCase("C")) {
                             currentDepartment = "regulars";
-                            break;
+
                         } else {
                             int choice = Integer.parseInt(selection);
                             if (choice > Topping.cheeses.length) {
@@ -147,6 +149,7 @@ public class SandwichScreen {
 
                             }
                         }
+                        theSandwich.displayToppings();
                     } catch (Exception e) {
                         System.out.println("Invalid Command");
                     }
@@ -158,17 +161,15 @@ public class SandwichScreen {
                         for (int i = 0; i < Topping.regulars.length; i++) {
                             System.out.println(" (" + (i + 1) + ") " + Topping.regulars[i]);
                         }
-                        System.out.println(" (B) - Return back to size selection");
+                        System.out.println(" (B) - Return back to cheese selection");
                         System.out.println(" (C) - Continue to sauces selection");
 
                         String selection = Console.PromptForString();
 
                         if (selection.equalsIgnoreCase("B")) {
                             currentDepartment = "cheese";
-                            break;
                         } else if (selection.equalsIgnoreCase("C")) {
                             currentDepartment = "sauces";
-                            break;
                         } else {
                             int choice = Integer.parseInt(selection);
                             if (choice > Topping.regulars.length) {
@@ -185,6 +186,7 @@ public class SandwichScreen {
 
                             }
                         }
+                        theSandwich.displayToppings();
                     } catch (Exception e) {
                         System.out.println("Invalid Command");
                     }
@@ -202,10 +204,8 @@ public class SandwichScreen {
 
                         if (selection.equalsIgnoreCase("B")) {
                             currentDepartment = "regulars";
-                            break;
                         } else if (selection.equalsIgnoreCase("C")) {
                             currentDepartment = "sides";
-                            break;
                         } else {
                             int choice = Integer.parseInt(selection);
                             if (choice > Topping.sauces.length) {
@@ -222,6 +222,7 @@ public class SandwichScreen {
 
                             }
                         }
+                        theSandwich.displayToppings();
                     } catch (Exception e) {
                         System.out.println("Invalid Command");
                     }
@@ -240,11 +241,16 @@ public class SandwichScreen {
 
                         if (selection.equalsIgnoreCase("B")) {
                             currentDepartment = "sauces";
-                            break;
                         } else if (selection.equalsIgnoreCase("C")) {
                             currentDepartment = "";
                             confirmation = confirmSandwich(theSandwich);
-                            break;
+                            if (confirmation) {
+                                OrderScreen.items.add(theSandwich);
+                                System.out.println("Sandwich added to Cart");
+                            }else{
+                                System.out.println("Sandwich Cancelled.");
+                            }
+                            exit = true;
 
                         } else {
                             int choice = Integer.parseInt(selection);
@@ -259,6 +265,8 @@ public class SandwichScreen {
                                     Topping currentTopping = toppings.get(sideName);
                                     currentTopping.addQuantity();
                                 }
+                                theSandwich.displayToppings();
+
 
                             }
                         }
@@ -267,12 +275,6 @@ public class SandwichScreen {
                         System.out.println("Invalid Command");
                     }
                 }
-                if (confirmation) {
-                    OrderScreen.items.add(theSandwich);
-                    break;
-
-                }
-
 
 
             } catch (Exception e) {

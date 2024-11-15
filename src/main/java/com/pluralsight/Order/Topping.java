@@ -78,12 +78,14 @@ public class Topping {
         return new Topping(description, "Sides", 1);
     }
 
-//    public double getPrice(){
-//
-//    }
+
 
     @Override
     public String toString(){
         return quantity + "x " + this.description + "(" + this.type+")";
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

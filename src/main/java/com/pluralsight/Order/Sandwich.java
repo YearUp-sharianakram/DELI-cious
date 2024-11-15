@@ -12,15 +12,13 @@ public class Sandwich extends MenuItem {
 
     private String breadType;
     private Boolean isToasted;
-//    private boolean containsMeat;
-//    private boolean containsCheese;
+
     private HashMap<String, Topping> toppings;
 
     public Sandwich(String size, String breadType, boolean isToasted) {
         super("Sandwich", size);
         this.breadType = breadType;
-//        this.containsMeat = false;
-//        this.containsCheese = false;
+
         this.isToasted = isToasted;
         this.toppings = new HashMap<>();
     }
@@ -106,6 +104,28 @@ public class Sandwich extends MenuItem {
     public void setToppings(HashMap<String, Topping> toppings) {
         this.toppings = toppings;
     }
+
+    public void displayToppings() {
+        if (!toppings.isEmpty()) {
+        System.out.println("Toppings");
+        System.out.println("-------------------");
+
+            for (Topping topping : toppings.values())
+                System.out.println(topping);
+        }
+    }
+
+    public void removeTopping(String removedTopping){
+        if (this.toppings.containsKey(removedTopping)) {
+            Topping current = toppings.get(removedTopping);
+            if (current.getQuantity() > 1){
+                current.setQuantity(current.getQuantity() - 1);
+            }else{
+                this.toppings.remove(removedTopping);
+            }
+        }
+    }
+
 
     @Override
     public String toString() {
