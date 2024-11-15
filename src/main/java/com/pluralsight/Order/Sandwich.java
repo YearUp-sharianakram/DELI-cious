@@ -123,6 +123,8 @@ public class Sandwich extends MenuItem {
             }else{
                 this.toppings.remove(removedTopping);
             }
+        }else{
+            System.out.println("Topping not found");
         }
     }
 

@@ -21,11 +21,14 @@ If the user decides to add a sandwich, they will be brought to the customize san
 ![Screenshot3](https://github.com/YearUp-sharianakram/DELI-cious/blob/main/ScreenshotsCS2/Screenshot3.png)
 
 When the user is done adding items to their order and ready to check out, they will do so from the order screen. After selecting "5", their current Cart will be displayed with the total and will be given the option to confirm or cancel the entire order and head back to the Home Screen. If the user confirms, a receipt will be created and saved to the directory called "Receipts" with the filename as the current Local Date Time formatted as "yyyyMMdd-hhmmss".
-## New Feature
 
-Description
+## New Feature - remove toppings
 
-![Screenshot4](https://github.com/YearUp-sharianakram/AccountingLedgerApp/blob/main/ScreenshotsForCapstone1/Screenshot4.png)
+A new feature has been added! You are now able to remove toppings that you have added accidentally or changed your mind about. No need to restart from the beginning for customizing sandwiches. On the confirm page, there is now an option to remove toppings from your sandwich.
+
+![Screenshot4]()
 
 ## Interesting Piece of Code
+
+The most interesting piece of code was how I was able to implement the forward and backward screens for the toppings. I started with the current department as "meat" since that was the first topping to add. Then changing that variable to "cheese", stopped the while loop for the meat topping and started a different while loop for the cheese toppings. There is even an option to go back to meat. There is forward and backword compatability from choosing the bread type to confirming if the sandwich should be added to the order.This allows flexibility for the user to make mistakes and correct them instead of having to restart from the beginning. 
 

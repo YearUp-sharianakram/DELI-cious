@@ -75,8 +75,6 @@ public class SandwichScreen {
                     }
                 }
 
-                boolean confirmation = false;
-
                 while (!size.isEmpty() && currentDepartment.equals("meat")) {
                     try {
                         System.out.println("\nWhat meats would you like?");
@@ -191,6 +189,7 @@ public class SandwichScreen {
                         System.out.println("Invalid Command");
                     }
                 }
+
                 while (currentDepartment.equals("sauces")) {
                     try {
                         System.out.println("\nWhat sauces would you like?");
@@ -242,15 +241,43 @@ public class SandwichScreen {
                         if (selection.equalsIgnoreCase("B")) {
                             currentDepartment = "sauces";
                         } else if (selection.equalsIgnoreCase("C")) {
-                            currentDepartment = "";
-                            confirmation = confirmSandwich(theSandwich);
-                            if (confirmation) {
-                                OrderScreen.items.add(theSandwich);
-                                System.out.println("Sandwich added to Cart");
-                            }else{
-                                System.out.println("Sandwich Cancelled.");
+                            while (true) {
+                                System.out.println(theSandwich);
+                                System.out.println();
+                                System.out.println("(1) - Confirm ");
+                                System.out.println("(2) - add toppings ");
+                                System.out.println("(3) - remove toppings");
+                                System.out.println("(4) - cancel Order");
+                                String confirmSelection = Console.PromptForString("Option: ");
+
+                                if (confirmSelection.equals("1")) {
+                                    OrderScreen.items.add(theSandwich);
+                                    currentDepartment = "";
+                                    System.out.println("Successfully added sandwich to order!");
+                                    exit = true;
+                                    break;
+                                } else if (confirmSelection.equals("2")) {
+                                    currentDepartment = "meat";
+                                    break;
+                                } else if (confirmSelection.equals(("3"))) {
+                                    while (!theSandwich.getToppings().isEmpty()) {
+                                        theSandwich.displayToppings();
+                                        String currentRemoveTopping = Console.PromptForString("Which toppings would you like to remove? or press X to go back to confirmation: ");
+                                        if (!currentRemoveTopping.equalsIgnoreCase("X")) {
+                                            theSandwich.removeTopping(currentRemoveTopping);
+                                        } else {
+                                            break;
+                                        }
+                                    }
+                                } else if (confirmSelection.equals("4")) {
+                                    System.out.println("Sandwich Cancelled.");
+                                    exit = true;
+                                    currentDepartment = "";
+                                    break;
+                                }else{
+                                    System.out.println("Invalid Command");
+                                }
                             }
-                            exit = true;
 
                         } else {
                             int choice = Integer.parseInt(selection);
@@ -284,9 +311,6 @@ public class SandwichScreen {
 
         }
     }
-    public static boolean confirmSandwich(Sandwich sandwich){
-        System.out.println(sandwich);
-        return Console.PromptForYesNo("Add Sandwich to Order?");
 
-    }
 }
+
