@@ -52,6 +52,9 @@ public class Topping {
     public String getType() {
         return type;
     }
+    public int getQuantity() {
+        return quantity;
+    }
 
     public void addQuantity() {
         this.quantity += 1;
@@ -69,10 +72,10 @@ public class Topping {
         return new Topping(description, "Regular", 1);
     }
     public static Topping createSauce(String description){
-        return new Topping(description, "sauces", 1);
+        return new Topping(description, "Sauces", 1);
     }
     public static Topping createSide(String description){
-        return new Topping(description, "sides", 1);
+        return new Topping(description, "Sides", 1);
     }
 
 //    public double getPrice(){

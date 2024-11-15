@@ -27,6 +27,6 @@ public class Chips extends MenuItem {
 
     @Override
     public String toString() {
-        return (this.getDescription() + " " + this.getPrice());
+        return  this.getDescription() + " -  $" + String.format("%.2f", this.getPrice());
     }
 }

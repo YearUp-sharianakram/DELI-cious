@@ -12,15 +12,15 @@ public class Sandwich extends MenuItem {
 
     private String breadType;
     private Boolean isToasted;
-    private boolean containsMeat;
-    private boolean containsCheese;
+//    private boolean containsMeat;
+//    private boolean containsCheese;
     private HashMap<String, Topping> toppings;
 
     public Sandwich(String size, String breadType, boolean isToasted) {
         super("Sandwich", size);
         this.breadType = breadType;
-        this.containsMeat = false;
-        this.containsCheese = false;
+//        this.containsMeat = false;
+//        this.containsCheese = false;
         this.isToasted = isToasted;
         this.toppings = new HashMap<>();
     }
@@ -54,20 +54,28 @@ public class Sandwich extends MenuItem {
 
         }
 
+        boolean hasMeat = false;
+        boolean hasCheese = false;
 
         for (String key : toppings.keySet()) {
             Topping currentTopping = toppings.get(key);
             if (currentTopping.getType().equals("Meat")) {
-                if (this.containsMeat) {
-                    cost = cost + extraMeatCost;
-                } else {
-                    cost = cost + singleMeatCost;
+                for(int i = 1; i <= currentTopping.getQuantity(); i++){
+                    if (hasMeat) {
+                        cost = cost + extraMeatCost;
+                    } else {
+                        cost = cost + singleMeatCost;
+                        hasMeat = true;
+                    }
                 }
             } else if (currentTopping.getType().equals("Cheese")) {
-                if (this.containsCheese) {
-                    cost = cost + extraCheeseCost;
-                } else {
-                    cost = cost + singleCheeseCost;
+                for(int i = 1; i <= currentTopping.getQuantity(); i++) {
+                    if (hasCheese) {
+                        cost = cost + extraCheeseCost;
+                    } else {
+                        cost = cost + singleCheeseCost;
+                        hasCheese = true;
+                    }
                 }
             }
         }
@@ -89,22 +97,6 @@ public class Sandwich extends MenuItem {
 
     public void setToasted(Boolean toasted) {
         isToasted = toasted;
-    }
-
-    public boolean isContainsMeat() {
-        return containsMeat;
-    }
-
-    public void setContainsMeat(boolean containsMeat) {
-        this.containsMeat = containsMeat;
-    }
-
-    public boolean isContainsCheese() {
-        return containsCheese;
-    }
-
-    public void setContainsCheese(boolean containsCheese) {
-        this.containsCheese = containsCheese;
     }
 
     public HashMap<String, Topping> getToppings() {
@@ -132,6 +124,7 @@ public class Sandwich extends MenuItem {
             statement.append(" 12\" ");
         }
         statement.append(this.breadType);
+        statement.append(String.format(" -  $" + String.format("%.2f", this.getPrice())));
         for (Topping topping : (this.toppings).values()){
             statement.append("\n    ").append(topping);
         }

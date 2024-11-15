@@ -16,6 +16,7 @@ public class HomeScreen {
 
                 if (selection.equalsIgnoreCase("N")) {
                     OrderScreen.orderScreen();
+                    break;
                 } else if (selection.equalsIgnoreCase("X")) {
                     System.out.println("Thank you for shopping at DELI-cious! :D");
                     return;

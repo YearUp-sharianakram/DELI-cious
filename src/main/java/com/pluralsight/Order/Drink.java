@@ -31,7 +31,7 @@ public class Drink extends MenuItem {
         }else{
             drinkStatement = drinkStatement + " (Not Iced)";
         }
-        return (drinkStatement + " " + this.getPrice());
+        return String.format("%s -  $%.2f", drinkStatement, this.getPrice());
 
     }
 }

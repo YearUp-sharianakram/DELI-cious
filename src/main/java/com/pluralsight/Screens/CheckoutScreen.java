@@ -2,29 +2,44 @@ package com.pluralsight.Screens;
 import com.pluralsight.Order.*;
 import com.pluralsight.util.*;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class CheckoutScreen {
     public static void checkoutScreen() {
-        while (true) {
+
             try {
-                System.out.println("\nWelcome to DELI-cious");
-                System.out.println("How may we help you today?");
-                System.out.println(" (N)- New Order");
-                System.out.println(" (X)- Exit");
+                OrderScreen.displayCurrentItems();
 
-                String selection = Console.PromptForString();
+                boolean confirmed = Console.PromptForYesNo("Confirm or Cancel?");
+                if(!confirmed){
+                    OrderScreen.items.clear();
+//                    HomeScreen.homeScreen();
 
-                if (selection.equalsIgnoreCase("N")) {
-                    OrderScreen.orderScreen();
-                } else if (selection.equalsIgnoreCase("X")) {
-                    System.out.println("Thank you for shopping at DELI-cious! :D");
-                    return;
-                } else {
-                    System.out.println("Invalid Command");
+
+                }else{
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
+                    String filename = "Receipts/" + (LocalDateTime.now().format(formatter) ) + ".txt";
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(filename ))) {
+                        for (MenuItem item: OrderScreen.items){
+                            bw.write(item.toString() + "\n");
+
+                        }
+                        bw.write("------------------------");
+                        bw.write(String.format("\nTotal: $%.2f", OrderScreen.getTotalPrice()));
+                        bw.close();
+                        HomeScreen.homeScreen();
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Invalid Command");
             }
         }
     }
-}
+

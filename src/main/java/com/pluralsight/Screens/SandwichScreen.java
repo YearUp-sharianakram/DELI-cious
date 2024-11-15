@@ -9,7 +9,7 @@ public class SandwichScreen {
     public static void sandwichScreen() {
         String breadName = "";
         String size = "";
-        System.out.println("\nCreating Sandich");
+        System.out.println("\nCreating Sandwich");
         Sandwich theSandwich = null;
         HashMap<String, Topping> toppings = new HashMap<>();
         boolean toasted = false;
@@ -26,7 +26,6 @@ public class SandwichScreen {
                     String selection = Console.PromptForString("Option: ");
 
                     if (selection.equalsIgnoreCase("X")) {
-                        OrderScreen.orderScreen();
                         break;
                     } else {
                         int choice = Integer.parseInt(selection);
@@ -55,17 +54,17 @@ public class SandwichScreen {
                         break;
                     } else if (option.equalsIgnoreCase("S") || option.equalsIgnoreCase("small")) {
                         size = "Small";
-                        theSandwich = new Sandwich("Small" , breadName, toasted);
+                        theSandwich = new Sandwich("Small", breadName, toasted);
                         toppings = theSandwich.getToppings();
                         break;
                     } else if (option.equalsIgnoreCase("M") || option.equalsIgnoreCase("medium")) {
                         size = "Medium";
-                        theSandwich = new Sandwich("Small" , breadName, toasted);
+                        theSandwich = new Sandwich("Small", breadName, toasted);
                         toppings = theSandwich.getToppings();
                         break;
                     } else if (option.equalsIgnoreCase("L") || option.equalsIgnoreCase("Large")) {
                         size = "Large";
-                        theSandwich = new Sandwich("Small" , breadName, toasted);
+                        theSandwich = new Sandwich("Small", breadName, toasted);
                         toppings = theSandwich.getToppings();
                         break;
                     } else {
@@ -75,9 +74,8 @@ public class SandwichScreen {
 
                 boolean confirmation = false;
                 String currentDepartment = "meat";
-                while (!size.isEmpty()) {
-
-                    while (currentDepartment.equals("meat")) {
+                while (currentDepartment.equals("meat")) {
+                    try {
                         System.out.println("\nWhat meats would you like?");
                         for (int i = 0; i < Topping.meats.length; i++) {
                             System.out.println(" (" + (i + 1) + ") " + Topping.meats[i]);
@@ -102,7 +100,7 @@ public class SandwichScreen {
                                 if (!toppings.containsKey(meatName)) {
                                     Topping currentTopping = Topping.createMeat(meatName);
                                     toppings.put(meatName, currentTopping);
-                                    theSandwich.setContainsMeat(true);
+//                                    theSandwich.setContainsMeat(true);
                                 } else {
                                     Topping currentTopping = toppings.get(meatName);
                                     currentTopping.addQuantity();
@@ -110,9 +108,13 @@ public class SandwichScreen {
 
                             }
                         }
+                    } catch (Exception e) {
+                        System.out.println("Invalid Command");
                     }
+                }
 
-                    while (currentDepartment.equals("cheese")) {
+                while (currentDepartment.equals("cheese")) {
+                    try {
                         System.out.println("\nWhat cheese would you like?");
                         for (int i = 0; i < Topping.cheeses.length; i++) {
                             System.out.println(" (" + (i + 1) + ") " + Topping.cheeses[i]);
@@ -137,7 +139,7 @@ public class SandwichScreen {
                                 if (!toppings.containsKey(cheeseName)) {
                                     Topping currentTopping = Topping.createCheese(cheeseName);
                                     toppings.put(cheeseName, currentTopping);
-                                    theSandwich.setContainsCheese(true);
+
                                 } else {
                                     Topping currentTopping = toppings.get(cheeseName);
                                     currentTopping.addQuantity();
@@ -145,9 +147,13 @@ public class SandwichScreen {
 
                             }
                         }
+                    } catch (Exception e) {
+                        System.out.println("Invalid Command");
                     }
+                }
 
-                    while (currentDepartment.equals("regulars")) {
+                while (currentDepartment.equals("regulars")) {
+                    try {
                         System.out.println("\nWhat regulars would you like?");
                         for (int i = 0; i < Topping.regulars.length; i++) {
                             System.out.println(" (" + (i + 1) + ") " + Topping.regulars[i]);
@@ -179,9 +185,12 @@ public class SandwichScreen {
 
                             }
                         }
+                    } catch (Exception e) {
+                        System.out.println("Invalid Command");
                     }
-
-                    while (currentDepartment.equals("sauces")) {
+                }
+                while (currentDepartment.equals("sauces")) {
+                    try {
                         System.out.println("\nWhat sauces would you like?");
                         for (int i = 0; i < Topping.sauces.length; i++) {
                             System.out.println(" (" + (i + 1) + ") " + Topping.sauces[i]);
@@ -213,9 +222,13 @@ public class SandwichScreen {
 
                             }
                         }
+                    } catch (Exception e) {
+                        System.out.println("Invalid Command");
                     }
+                }
 
-                    while (currentDepartment.equals("sides")) {
+                while (currentDepartment.equals("sides")) {
+                    try {
                         System.out.println("\nWhat sides would you like?");
                         for (int i = 0; i < Topping.sides.length; i++) {
                             System.out.println(" (" + (i + 1) + ") " + Topping.sides[i]);
@@ -231,6 +244,7 @@ public class SandwichScreen {
                         } else if (selection.equalsIgnoreCase("C")) {
                             currentDepartment = "";
                             confirmation = confirmSandwich(theSandwich);
+                            break;
 
                         } else {
                             int choice = Integer.parseInt(selection);
@@ -248,24 +262,29 @@ public class SandwichScreen {
 
                             }
                         }
-                        if (confirmation){
-                            OrderScreen.items.add(theSandwich);
-                            breadName = "";
-                            size = "";
-                        }
+
+                    } catch (Exception e) {
+                        System.out.println("Invalid Command");
                     }
                 }
+                if (confirmation) {
+                    OrderScreen.items.add(theSandwich);
+                    break;
 
-            }catch (Exception e) {
+                }
+
+
+
+            } catch (Exception e) {
                 System.out.println("Invalid Command");
             }
-        }
 
 
         }
+    }
     public static boolean confirmSandwich(Sandwich sandwich){
         System.out.println(sandwich);
-        return Console.PromptForYesNo("Confirm Order");
+        return Console.PromptForYesNo("Add Sandwich to Order?");
 
     }
 }

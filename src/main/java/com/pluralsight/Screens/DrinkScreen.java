@@ -32,7 +32,6 @@ public class DrinkScreen {
 
                     String option = Console.PromptForString("Option: ");
                     if (option.equalsIgnoreCase("X")) {
-                        OrderScreen.orderScreen();
                         break;
                     } else if (option.equalsIgnoreCase("S") || option.equalsIgnoreCase("small")) {
                         size = "Small";
@@ -76,7 +75,9 @@ public class DrinkScreen {
                         System.out.println("Successfully added drink!!!");
                         size = "";
                         }
+                    break;
                     }
+
 
 
 

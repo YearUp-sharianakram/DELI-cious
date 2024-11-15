@@ -24,22 +24,29 @@ public class OrderScreen {
 
                 if (selection.equalsIgnoreCase("1")) {
                     SandwichScreen.sandwichScreen();
+
                 }
                 else if (selection.equalsIgnoreCase("2")) {
                     DrinkScreen.drinkScreen();
+
                 }
                 else if (selection.equalsIgnoreCase("3")) {
                     ChipsScreen.chipsScreen();
+
                 }
                 else if (selection.equalsIgnoreCase("4")) {
                     displayCurrentItems();
+
                 }
                 else if (selection.equalsIgnoreCase("5")) {
                     CheckoutScreen.checkoutScreen();
+                    break;
+
                 }
                 else if (selection.equalsIgnoreCase("0")) {
                     items = new ArrayList<>();
                     HomeScreen.homeScreen();
+                    break;
                 } else {
                     System.out.println("Invalid Command");
                 }
@@ -54,5 +61,16 @@ public class OrderScreen {
         for(MenuItem item: items){
             System.out.println(item);
         }
+        System.out.println("----------------------------");
+        System.out.printf("Total: $%.2f", getTotalPrice());
+        System.out.println();
+    }
+
+    public static double getTotalPrice(){
+        double total = 0.0;
+        for(MenuItem item : items){
+            total = total + item.getPrice();
+        }
+        return total;
     }
 }
