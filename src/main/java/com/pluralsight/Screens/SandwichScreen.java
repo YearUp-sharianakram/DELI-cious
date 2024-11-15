@@ -48,7 +48,7 @@ public class SandwichScreen {
                     System.out.println("Which size would you like?");
                     System.out.println(" (S) - Small 4 inch");
                     System.out.println(" (M) - Medium 8 inch");
-                    System.out.println(" (L) - Medium 12 inch");
+                    System.out.println(" (L) - Large 12 inch");
                     System.out.println(" (B) - Return back to Bread Selection Screen");
 
                     String option = Console.PromptForString("Option: ");
@@ -62,12 +62,12 @@ public class SandwichScreen {
 
                     } else if (option.equalsIgnoreCase("M") || option.equalsIgnoreCase("medium")) {
                         size = "Medium";
-                        theSandwich = new Sandwich("Small", breadName, toasted);
+                        theSandwich = new Sandwich("Medium", breadName, toasted);
                         toppings = theSandwich.getToppings();
 
                     } else if (option.equalsIgnoreCase("L") || option.equalsIgnoreCase("Large")) {
                         size = "Large";
-                        theSandwich = new Sandwich("Small", breadName, toasted);
+                        theSandwich = new Sandwich("Large", breadName, toasted);
                         toppings = theSandwich.getToppings();
 
                     } else {
