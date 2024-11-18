@@ -32,6 +32,7 @@ public class CheckoutScreen {
                         bw.write("------------------------");
                         bw.write(String.format("\nTotal: $%.2f", OrderScreen.getTotalPrice()));
                         bw.close();
+                        OrderScreen.items.clear();
                         HomeScreen.homeScreen();
                     } catch (IOException e) {
                         throw new RuntimeException(e);

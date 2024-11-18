@@ -27,7 +27,7 @@ public class DrinkScreen {
                     System.out.println("Please choose one of the following drink size options:");
                     System.out.println(" (S) - Small");
                     System.out.println(" (M) - Medium");
-                    System.out.println(" (L) - Medium");
+                    System.out.println(" (L) - Large");
                     System.out.println(" (X) - Return back to Order Screen");
 
                     String option = Console.PromptForString("Option: ");
